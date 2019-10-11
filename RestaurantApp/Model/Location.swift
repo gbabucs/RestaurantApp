@@ -11,6 +11,12 @@ extension Coordinate: CustomStringConvertible {
     }
 }
 
+extension Coordinate: Equatable {
+    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
+        return (lhs.latitude == rhs.latitude) && (lhs.longitude == rhs.longitude)
+    }
+}
+
 
 struct Location : Codable {
 	let address : String?

@@ -10,7 +10,6 @@
 		099B533AC4A03A7195CD1B7A /* Pods_RestaurantApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E20EEDD58303A1B2224547E5 /* Pods_RestaurantApp.framework */; };
 		6F87384D2350C50B006E3934 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87384C2350C50B006E3934 /* AppDelegate.swift */; };
 		6F87384F2350C50B006E3934 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87384E2350C50B006E3934 /* SceneDelegate.swift */; };
-		6F8738512350C50B006E3934 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8738502350C50B006E3934 /* ViewController.swift */; };
 		6F8738562350C50C006E3934 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F8738552350C50C006E3934 /* Assets.xcassets */; };
 		6F8738592350C50C006E3934 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F8738572350C50C006E3934 /* LaunchScreen.storyboard */; };
 		6F8738842350C527006E3934 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8738612350C526006E3934 /* DataController.swift */; };
@@ -37,6 +36,7 @@
 		6F87389A2350C527006E3934 /* VenueDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8738802350C527006E3934 /* VenueDetailViewModel.swift */; };
 		6F87389B2350C527006E3934 /* VenueListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8738812350C527006E3934 /* VenueListViewModel.swift */; };
 		6F87389C2350C527006E3934 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8738832350C527006E3934 /* LocationManager.swift */; };
+		6F87389E2350EC22006E3934 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87389D2350EC21006E3934 /* AnnotationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +44,6 @@
 		6F8738492350C50B006E3934 /* RestaurantApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F87384C2350C50B006E3934 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6F87384E2350C50B006E3934 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6F8738502350C50B006E3934 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6F8738552350C50C006E3934 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6F8738582350C50C006E3934 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6F87385A2350C50C006E3934 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		6F8738802350C527006E3934 /* VenueDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDetailViewModel.swift; sourceTree = "<group>"; };
 		6F8738812350C527006E3934 /* VenueListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueListViewModel.swift; sourceTree = "<group>"; };
 		6F8738832350C527006E3934 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		6F87389D2350EC21006E3934 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		7EF167303B90780A207208D7 /* Pods-RestaurantApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantApp.release.xcconfig"; path = "Target Support Files/Pods-RestaurantApp/Pods-RestaurantApp.release.xcconfig"; sourceTree = "<group>"; };
 		E20EEDD58303A1B2224547E5 /* Pods_RestaurantApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -129,7 +129,6 @@
 				6F87387F2350C527006E3934 /* ViewModel */,
 				6F87384C2350C50B006E3934 /* AppDelegate.swift */,
 				6F87384E2350C50B006E3934 /* SceneDelegate.swift */,
-				6F8738502350C50B006E3934 /* ViewController.swift */,
 				6F8738552350C50C006E3934 /* Assets.xcassets */,
 				6F8738572350C50C006E3934 /* LaunchScreen.storyboard */,
 				6F87385A2350C50C006E3934 /* Info.plist */,
@@ -201,6 +200,7 @@
 		6F87387A2350C527006E3934 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F87389D2350EC21006E3934 /* AnnotationView.swift */,
 				6F87387B2350C527006E3934 /* Main.storyboard */,
 				6F87387D2350C527006E3934 /* Cell */,
 			);
@@ -362,7 +362,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F8738512350C50B006E3934 /* ViewController.swift in Sources */,
 				6F8738912350C527006E3934 /* Stats.swift in Sources */,
 				6F8738932350C527006E3934 /* FourSquareAPI.swift in Sources */,
 				6F8738952350C527006E3934 /* NetworkConnector.swift in Sources */,
@@ -380,6 +379,7 @@
 				6F8738992350C527006E3934 /* VenueListCell.swift in Sources */,
 				6F8738852350C527006E3934 /* DataAdapter.swift in Sources */,
 				6F8738962350C527006E3934 /* HTTPMethod.swift in Sources */,
+				6F87389E2350EC22006E3934 /* AnnotationView.swift in Sources */,
 				6F87388F2350C527006E3934 /* BaseModel.swift in Sources */,
 				6F87384D2350C50B006E3934 /* AppDelegate.swift in Sources */,
 				6F8738872350C527006E3934 /* EndPoint.swift in Sources */,

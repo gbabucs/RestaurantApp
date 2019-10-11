@@ -22,21 +22,21 @@ class VenueListViewController: UIViewController {
     //--------------------------------------------------------------------------
     // MARK: - properties
     //--------------------------------------------------------------------------
-
+    
     let reachability : Reachability! = Reachability()
-    var queryParams = SearchParameter()
-    var viewModel = VenueListViewModel()
     let hud = JGProgressHUD(style: .dark)
     
+    var queryParams = SearchParameter()
+    var viewModel = VenueListViewModel()
+    
     fileprivate var coordinate: Coordinate?
-    fileprivate var locationManager = LocationManager()
+    var locationManager: CLLocationManager!
+    var onLocationUpdate: ((Coordinate) -> ())?
     
     private(set) var selectedVenue: Venues?
-    
     private var isReachable: Bool {
-        guard reachability.connection != .none else {
-            return false
-        }
+        guard reachability.connection != .none else { return false }
+        
         return true
     }
     
@@ -57,12 +57,20 @@ class VenueListViewController: UIViewController {
         tableView.estimatedRowHeight = 115
         tableView.tableFooterView = UIView()
         
-        locationManager.getPermission()
-        locationManager.onUpdate = { coordinate in
+        self.onLocationUpdate = { coordinate in
             self.queryParams.coordinate = coordinate
             self.fetchData()
-            self.mapView.showsUserLocation = true
         }
+        
+        self.mapView.mapType = .standard
+        self.mapView.showsUserLocation = true
+        self.mapView.showAnnotations(mapView.annotations, animated: true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        determineCurrentLocation()
     }
     
     //--------------------------------------------------------------------------
@@ -96,6 +104,21 @@ class VenueListViewController: UIViewController {
     
     func startWatchingReachability() {
         try? self.reachability.startNotifier()
+    }
+    
+    //--------------------------------------------------------------------------
+    // MARK: - Helpers
+    //--------------------------------------------------------------------------
+    
+    func determineCurrentLocation() {
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestAlwaysAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.startUpdatingLocation()
+        }
     }
     
     //--------------------------------------------------------------------------
@@ -155,6 +178,26 @@ extension VenueListViewController: UITableViewDataSource {
     }
 }
 
+//--------------------------------------------------------------------------
+// MARK: - CLLocationManagerDelegate
+//--------------------------------------------------------------------------
+
+extension VenueListViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.last else { return }
+        let coordinate = Coordinate(location: location)
+        //let customLocation = CLLocation(latitude: 37.785834, longitude: -122.406417)
+        // let customCoordinate = Coordinate(location: customLocation)
+        
+        if queryParams.coordinate != coordinate {
+            if let onLocationUpdate = onLocationUpdate {
+                onLocationUpdate(coordinate)
+            }
+        }
+    }
+}
+
 // MARK: - MKMapViewDelegate
 
 extension VenueListViewController: MKMapViewDelegate {
@@ -171,6 +214,23 @@ extension VenueListViewController: MKMapViewDelegate {
         mapView.setRegion(region, animated: true)
     }
     
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is MKPointAnnotation else { return nil }
+        
+        let identifier = "Annotation"
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView!.canShowCallout = true
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        return annotationView
+    }
+    
+    
     func addAnnotations() {
         removeAnnotations()
         
@@ -178,18 +238,18 @@ extension VenueListViewController: MKMapViewDelegate {
             venues.count > 0
             else { return }
         
-        let annotations: [MKPointAnnotation] = venues.map { venue in
-            let point = MKPointAnnotation()
+        let annotationViews: [MKPointAnnotation] = venues.map { venue in
+            var point = MKPointAnnotation()
             
             guard let coordinate = venue.location?.coordinate else { return point }
             
-            point.coordinate = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
-            point.title = venue.name
+            let coordinate2D = CLLocationCoordinate2D(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            point = AnnotationView(venue: venue, coordinate: coordinate2D)
             
             return point
         }
         
-        mapView.addAnnotations(annotations)
+        mapView.addAnnotations(annotationViews)
     }
     
     func removeAnnotations() {

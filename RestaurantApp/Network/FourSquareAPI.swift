@@ -43,7 +43,7 @@ extension FourSquareAPI: EndPoint {
         struct Value {
             static let version = "20160301"
             static let limit = "50"
-            static let radius = "50"
+            static let radius = "2000"
         }
     }
     
