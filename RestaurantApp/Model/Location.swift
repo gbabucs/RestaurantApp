@@ -1,23 +1,5 @@
 import Foundation
 
-struct Coordinate {
-    var latitude: Double = 0.0
-    var longitude: Double = 0.0
-}
-
-extension Coordinate: CustomStringConvertible {
-    var description: String {
-        return "\(latitude),\(longitude)"
-    }
-}
-
-extension Coordinate: Equatable {
-    static func == (lhs: Coordinate, rhs: Coordinate) -> Bool {
-        return (lhs.latitude == rhs.latitude) && (lhs.longitude == rhs.longitude)
-    }
-}
-
-
 struct Location : Codable {
 	let address : String?
 	let crossStreet : String?

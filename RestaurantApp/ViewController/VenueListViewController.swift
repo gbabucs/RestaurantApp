@@ -230,7 +230,6 @@ extension VenueListViewController: MKMapViewDelegate {
         return annotationView
     }
     
-    
     func addAnnotations() {
         removeAnnotations()
         

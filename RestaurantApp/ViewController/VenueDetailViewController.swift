@@ -29,7 +29,9 @@ class VenueDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Venue Details"
+        let title = venue?.name ?? "Restaurant Details"
+        
+        self.title = "\(title)"
         
         self.setupView()
     }
